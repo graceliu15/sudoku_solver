@@ -15,7 +15,7 @@ def sudoku_view(request):
         return render(request, 'solver/result.html', {'solution': solved_grid})
         # return render(request, 'solver/sudoku_form.html', {'form': form, 'range':range(9), 'solved_grid': solved_grid})
 
-    return render(request, 'solver/sudoku_form.html', {'form': form, 'fields': fields})
+    return render(request, 'solver/sudoku_form.html', {'form': form, 'fields': fields, 'range': range(9)})
 
 
 def sudoku_solver_view(request):

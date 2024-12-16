@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+<!-- {% load form_filters %} -->
 <html>
 <head>
     <title>Sudoku Solver</title>
-    <!-- <style>
+    <style>
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -12,36 +13,54 @@
             margin: 0;
             background-color: #f0f0f0;
         }
-        table {
-            border-collapse: collapse;
+        .grid-container {
+            display: flex;
+            justify-content: center; /* Horizontally center */
+            align-items: center;    /* Vertically center */
+            /* height: 100vh;          Full height of the viewport */
+        }
+        /* table {
+            /* border-collapse: collapse;
             background-color: white;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        } */
+        table {
+            border-collapse: collapse;  /* Make sure borders don't double up */
         }
-        td {
+
+        /* td {
+            border-right: 2px solid black;  /* Vertical line for each cell 
+        }
+        /* td {
             width: 50px;
             height: 50px;
             text-align: center;
             border: 1px solid #ccc;
-        }
-        input[type="number"] {
+        } */
+        /* input[type="number"] {
             width: 100%;
             height: 100%;
             border: none;
             text-align: center;
             font-size: 20px;
-            /* -moz-appearance: textfield;  Remove arrows in Firefox */
         }
-        /* Remove number input arrows in webkit browsers */
         input[type=number]::-webkit-inner-spin-button, 
         input[type=number]::-webkit-outer-spin-button { 
             -webkit-appearance: none; 
             margin: 0; 
-        }
+        }  */
+
         tr:nth-child(3n) td {
-            border-bottom: 2px solid black;
+            border-bottom: 4px solid black;
         }
         td:nth-child(3n) {
-            border-right: 2px solid black;
+            border-right: 4px solid black;
+        } 
+        tr td:last-child {
+            border-right: none;
+        }
+        tr:last-child td {
+            border-bottom: none;
         }
         button {
             display: block;
@@ -56,31 +75,127 @@
         button:hover {
             background-color: #45a049;
         }
-    </style> -->
+    </style>
+
 </head>
 <body>
     <div>
         <h1 style="text-align: center;">Sudoku Solver</h1>
+        <p style="text-align: center;">Enter numbers in below: </p>
         <form method="post">
             {% csrf_token %}
-            <!-- <table>
-                {% for row in fields %}
+            <div class="grid-container">
+                <table>
                     <tr>
-                        {% for field_name in row %}
-                            <td>{{ form.field_name }}</td>
-                        {% endfor %}
+                        <td>{{ form.cell_0_0 }}</td>
+                        <td>{{ form.cell_0_1 }}</td>
+                        <td>{{ form.cell_0_2 }}</td>
+                        <td>{{ form.cell_0_3 }}</td>
+                        <td>{{ form.cell_0_4 }}</td>
+                        <td>{{ form.cell_0_5 }}</td>
+                        <td>{{ form.cell_0_6 }}</td>
+                        <td>{{ form.cell_0_7 }}</td>
+                        <td>{{ form.cell_0_8 }}</td>
                     </tr>
+                    <tr>
+                        <td>{{ form.cell_1_0 }}</td>
+                        <td>{{ form.cell_1_1 }}</td>
+                        <td>{{ form.cell_1_2 }}</td>
+                        <td>{{ form.cell_1_3 }}</td>
+                        <td>{{ form.cell_1_4 }}</td>
+                        <td>{{ form.cell_1_5 }}</td>
+                        <td>{{ form.cell_1_6 }}</td>
+                        <td>{{ form.cell_1_7 }}</td>
+                        <td>{{ form.cell_1_8 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.cell_2_0 }}</td>
+                        <td>{{ form.cell_2_1 }}</td>
+                        <td>{{ form.cell_2_2 }}</td>
+                        <td>{{ form.cell_2_3 }}</td>
+                        <td>{{ form.cell_2_4 }}</td>
+                        <td>{{ form.cell_2_5 }}</td>
+                        <td>{{ form.cell_2_6 }}</td>
+                        <td>{{ form.cell_2_7 }}</td>
+                        <td>{{ form.cell_2_8 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.cell_3_0 }}</td>
+                        <td>{{ form.cell_3_1 }}</td>
+                        <td>{{ form.cell_3_2 }}</td>
+                        <td>{{ form.cell_3_3 }}</td>
+                        <td>{{ form.cell_3_4 }}</td>
+                        <td>{{ form.cell_3_5 }}</td>
+                        <td>{{ form.cell_3_6 }}</td>
+                        <td>{{ form.cell_3_7 }}</td>
+                        <td>{{ form.cell_3_8 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.cell_4_0 }}</td>
+                        <td>{{ form.cell_4_1 }}</td>
+                        <td>{{ form.cell_4_2 }}</td>
+                        <td>{{ form.cell_4_3 }}</td>
+                        <td>{{ form.cell_4_4 }}</td>
+                        <td>{{ form.cell_4_5 }}</td>
+                        <td>{{ form.cell_4_6 }}</td>
+                        <td>{{ form.cell_4_7 }}</td>
+                        <td>{{ form.cell_4_8 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.cell_5_0 }}</td>
+                        <td>{{ form.cell_5_1 }}</td>
+                        <td>{{ form.cell_5_2 }}</td>
+                        <td>{{ form.cell_5_3 }}</td>
+                        <td>{{ form.cell_5_4 }}</td>
+                        <td>{{ form.cell_5_5 }}</td>
+                        <td>{{ form.cell_5_6 }}</td>
+                        <td>{{ form.cell_5_7 }}</td>
+                        <td>{{ form.cell_5_8 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.cell_6_0 }}</td>
+                        <td>{{ form.cell_6_1 }}</td>
+                        <td>{{ form.cell_6_2 }}</td>
+                        <td>{{ form.cell_6_3 }}</td>
+                        <td>{{ form.cell_6_4 }}</td>
+                        <td>{{ form.cell_6_5 }}</td>
+                        <td>{{ form.cell_6_6 }}</td>
+                        <td>{{ form.cell_6_7 }}</td>
+                        <td>{{ form.cell_6_8 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.cell_7_0 }}</td>
+                        <td>{{ form.cell_7_1 }}</td>
+                        <td>{{ form.cell_7_2 }}</td>
+                        <td>{{ form.cell_7_3 }}</td>
+                        <td>{{ form.cell_7_4 }}</td>
+                        <td>{{ form.cell_7_5 }}</td>
+                        <td>{{ form.cell_7_6 }}</td>
+                        <td>{{ form.cell_7_7 }}</td>
+                        <td>{{ form.cell_7_8 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.cell_8_0 }}</td>
+                        <td>{{ form.cell_8_1 }}</td>
+                        <td>{{ form.cell_8_2 }}</td>
+                        <td>{{ form.cell_8_3 }}</td>
+                        <td>{{ form.cell_8_4 }}</td>
+                        <td>{{ form.cell_8_5 }}</td>
+                        <td>{{ form.cell_8_6 }}</td>
+                        <td>{{ form.cell_8_7 }}</td>
+                        <td>{{ form.cell_8_8 }}</td>
+                    </tr>
+                 </table>
+            </div>
+            
+            <!-- <table>
+                {% for field in form %}
+                <tr>
+                    <td>{{ field }}</td>
+                </tr>
                 {% endfor %}
             </table> -->
-            <!-- <div class="row">
-                <div class="col-md-6">
-                  {{ form.field1 }}
-                </div>
-                <div class="col-md-6">
-                  {{ form.field2 }}
-                </div>
-              </div> -->
-              {{ form.as_table }}
+              <!-- {{ form.as_table }} -->
             <button type="submit">Solve Sudoku</button>
         </form>
     </div>

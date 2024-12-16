@@ -18,10 +18,9 @@ class SudokuForm(forms.Form):
                         'class': 'grid-cell',
                         # 'size': '1',  # Make input very small
                         # 'maxlength': '1',
-                        'style': 'width:100px; text-align:center;'
+                        'style': 'width:50px; height:50px; text-align:center;'
                     }))
-        # field1 = forms.CharField(max_length=100)
-        # field2 = forms.CharField(max_length=100)
+
 
     def clean(self):
         cleaned_data = super().clean()
