@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sudoku Solver</title>
+</head>
+<body>
+    <h1>Sudoku Solver</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <textarea name="puzzle" rows="9" cols="9" placeholder="Enter Sudoku Puzzle"></textarea>
+        <br>
+        <button type="submit">Solve</button>
+    </form>
+</body>
+</html>
